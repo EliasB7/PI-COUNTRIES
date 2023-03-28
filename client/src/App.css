@@ -1,0 +1,8 @@
+.background {
+  min-height: 100vh;
+  background-image: url("./a4ceaeddaea1f8f6539e701a42e04b6b.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+}

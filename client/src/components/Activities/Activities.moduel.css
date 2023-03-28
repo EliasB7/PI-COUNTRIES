@@ -1,0 +1,32 @@
+.link {
+  display: block;
+  margin-top: 20px;
+  font-size: 18px;
+  color: azure;
+  text-decoration: none;
+}
+
+.box {
+  border: 1px solid #ccc;
+  border-radius: 40px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+table {
+  width: 100%;
+}
+
+th,
+td {
+  border-radius: 10px;
+  text-align: left;
+  padding: 10px;
+  color: black;
+  background-color: snow;
+  text-align: center;
+}
+
+th {
+  background-color: #ddd;
+}

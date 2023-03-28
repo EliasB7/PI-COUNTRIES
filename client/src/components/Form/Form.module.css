@@ -1,0 +1,135 @@
+.difficulty,
+.duration,
+.season,
+.name,
+.countries {
+  margin: 10px 0;
+  width: 500px;
+  color: white;
+}
+
+.label {
+  display: block;
+  margin-bottom: 5px;
+  color: white;
+  font-size: 18px;
+}
+
+.input {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #e0e0e0;
+  color: #333;
+  font-size: 16px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.input2 {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn1 {
+  margin-top: 20px;
+}
+
+.butn {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.butn:hover {
+  color: aliceblue;
+  background-color: grey;
+  border: grey;
+  border-radius: 5px;
+}
+.countryCont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.btn {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+  width: 270px;
+}
+
+.btn:hover {
+  color: aliceblue;
+  background-color: grey;
+  border: grey;
+  border-radius: 5px;
+}
+
+.order {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.countries1 {
+  width: 100%;
+}
+
+.mybutton {
+  display: flex;
+  flex-wrap: wrap;
+  border: none;
+  border-radius: 4px;
+  color: #ffffff;
+  cursor: default;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.myXbutton {
+  background-color: cadetblue;
+  margin: 4px;
+  border: grey;
+  height: 25px;
+  width: 35px;
+  border-radius: 5px;
+}
+
+.myXbutton:hover {
+  color: grey;
+  border: grey;
+  border-radius: 5px;
+}
+
+.imgPointer {
+  cursor: default;
+}

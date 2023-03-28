@@ -1,0 +1,101 @@
+.all {
+  font-family: "Montserrat", sans-serif;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.butn {
+  padding: 0.35em;
+  border: 1px solid white;
+  margin: 0 0.3em 0.3em 0;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  transition: 0.2s;
+  font-size: larger;
+  background-color: grey;
+  margin-top: 40px;
+}
+
+.butn:hover {
+  background-color: #8a8a8a;
+  border-color: #8a8a8a;
+}
+
+.link {
+  text-decoration: none;
+  display: contents;
+  font-size: small;
+}
+
+.countryContainer {
+  border: none;
+  border-radius: 4%;
+  margin: auto;
+  width: 25%;
+
+  color: white;
+  border: solid 1px #fafafa70;
+  background-color: grey;
+}
+
+.imgContainer img {
+  width: 60%;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+h1 {
+  font-size: 3rem;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-style: italic;
+}
+
+h4,
+h5 {
+  margin: 0;
+  padding: 0.2em;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.activity {
+  margin-top: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.activity h4 {
+  font-size: 1.5rem;
+  margin: 0.5em;
+}
+
+.activity img {
+  width: 100%;
+  max-width: 200px;
+  margin: 0.5em;
+}
+
+@media (max-width: 992px) {
+  .all {
+    margin-top: 1em;
+  }
+  .countryContainer {
+    width: 60%;
+    margin-left: 0;
+  }
+}

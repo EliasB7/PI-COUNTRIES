@@ -1,0 +1,35 @@
+.h1 {
+  text-align: center;
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+}
+
+.button {
+  background-color: #f05a28;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: gold;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
