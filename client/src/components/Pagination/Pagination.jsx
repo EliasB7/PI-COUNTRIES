@@ -9,6 +9,7 @@ export default function Pagination({
   const pageNumber = [];
 
   for (let i = 1; i <= Math.floor(countries / countriesPerPage); i++) {
+    //calculo el número de páginas necesarias para mostrar todos los elementos en grupos de countriesPerPage.
     pageNumber.push(i);
   }
 

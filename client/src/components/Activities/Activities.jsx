@@ -29,12 +29,6 @@ const Activities = ({ activities, countryName }) => {
         </table>
       </div>
     );
-  } else {
-    return (
-      <Link to="/newactivity">
-        <h3 className={styles.link}>CREATE AN ACTIVITY FOR THIS COUNTRY :D</h3>
-      </Link>
-    );
   }
 };
 

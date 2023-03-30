@@ -5,7 +5,7 @@ const { Op, Sequelize } = require("sequelize");
 async function saveCountries() {
   const allCountries = await (
     await axios("https://restcountries.com/v3/all")
-  ).data;
+  ).data; //me traigo la informacion de la api y la guardo en la constante allCountries
   const addCountries = await allCountries.map((country) => {
     return {
       id: country.cca3,
@@ -24,7 +24,7 @@ async function saveCountries() {
 async function getCountries(name) {
   if (!name) {
     const countryAll = await Country.findAll();
-    return !countryAll.length ? await saveCountries() : countryAll;
+    return !countryAll.length ? await saveCountries() : countryAll; //si el length de countyAll es 0 entonces ejecuto la funcion saveCountries y guarda la info, si no devuelve countryAll
   } else {
     const countryQuery = await Country.findAll({
       where: {

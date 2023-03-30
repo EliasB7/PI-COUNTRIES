@@ -3,19 +3,15 @@ const axios = require("axios");
 const { Op, Sequelize } = require("sequelize");
 
 async function getActivities(req, res) {
-  try {
-    const dbActivities = await Activity.findAll({
-      include: {
-        model: Country,
-        through: {
-          attributes: [],
-        },
+  const dbActivities = await Activity.findAll({
+    include: {
+      model: Country,
+      through: {
+        attributes: [],
       },
-    });
-    res.json(dbActivities);
-  } catch (error) {
-    console.error(error);
-  }
+    },
+  });
+  return dbActivities;
 }
 
 async function createActivity(req, res) {

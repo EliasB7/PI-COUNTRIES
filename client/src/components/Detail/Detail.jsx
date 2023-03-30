@@ -9,7 +9,6 @@ import style from "./Detail.module.css";
 export default function Detail() {
   const countryDetail = useSelector((state) => state.countryDetail);
   const dispatch = useDispatch();
-
   let { id } = useParams();
 
   useEffect(() => {

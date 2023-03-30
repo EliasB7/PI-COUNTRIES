@@ -6,7 +6,7 @@ const CountryCard = ({ flags, name }) => {
     <div className={styles.card}>
       <img className={styles.image} src={flags} alt={name} />
       <div>
-        <h2>{name}</h2>{" "}
+        <h2>{name}</h2>
       </div>
     </div>
   );
