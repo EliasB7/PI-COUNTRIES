@@ -3,18 +3,18 @@ import { useDispatch } from "react-redux";
 import { getCountriesByName } from "../../redux/actions";
 import style from "./SearchBar.module.css";
 
-const SearchBar = () => {
+const SearchBar = ({ handlerPagination }) => {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
 
   const handleInputChange = (event) => {
-    event.preventDefault();
     setName(event.target.value);
+    handlerPagination(1);
   };
 
   useEffect(() => {
     dispatch(getCountriesByName(name));
-  }, [name]);
+  }, [dispatch, name]);
 
   return (
     <div className={style.searchContainer}>

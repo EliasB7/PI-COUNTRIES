@@ -7,15 +7,24 @@ import style from "./Form.module.css";
 export default function Form() {
   const dispatch = useDispatch();
   const countries = useSelector((state) => state.countries);
+  const regexName = /^[a-zA-Z][a-zA-Z\s]{1,48}[a-zA-Z]$/;
   const [inputName, setInputName] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
-  const [error, setError] = useState(false);
+  const filteredCountries = countries.slice(currentPage, currentPage + 12);
   const [dataForm, setDataForm] = useState({
     name: "",
     difficulty: "",
     duration: "",
     season: "",
     countryID: [],
+  });
+
+  const [error, setError] = useState({
+    name: "",
+    difficulty: "",
+    duration: "",
+    season: "",
+    countryID: "",
   });
 
   const stateReset = () => {
@@ -59,6 +68,7 @@ export default function Form() {
 
   const handleCountrySelection = (e) => {
     const countryId = e.target.value;
+
     if (dataForm.countryID.includes(countryId)) {
       alert("This country has already been selected.");
     } else {
@@ -66,11 +76,67 @@ export default function Form() {
         ...dataForm,
         countryID: [...dataForm.countryID, countryId],
       });
+
+      setError({
+        ...error,
+        countryID: "",
+      });
     }
   };
 
+  const validateForm = (dataForm) => {
+    let error = {};
+
+    if (!dataForm.name) {
+      error.name = "INSERT NAME";
+    }
+    if (dataForm.countryID.length === 0) {
+      error.countryID = "SELECT LESS 1 COUNTRY";
+    }
+    if (dataForm.name) {
+      if (regexName.test(dataForm.name)) {
+        error.name = "";
+      } else {
+        error.name = "Please select a valid option for all required fields.";
+      }
+    }
+
+    if (dataForm.difficulty === "SELECT AN OPTION") {
+      error.difficulty = "SELECT AN VALID OPTION";
+    }
+    if (!dataForm.difficulty) {
+      error.difficulty = "SELECT DIFFICULTY";
+    } else if (dataForm.difficulty !== "") {
+      error.difficulty = "";
+    }
+
+    if (!dataForm.duration) {
+      error.duration = "SELECT DURATION";
+    } else if (dataForm.duration !== "") {
+      error.duration = "";
+    } else if (dataForm.duration === "SELECT AN OPTION") {
+      error.duration = "SELECT AN VALID OPTION";
+    }
+
+    if (!dataForm.season) {
+      error.season = "SELECT SEASON";
+    } else if (dataForm.season !== "") {
+      error.season = "";
+    } else if (dataForm.season === "SELECT AN OPTION") {
+      error.season = "SELECT AN VALID OPTION";
+    }
+
+    return error;
+  };
+
   const setDataHandler = (e) => {
-    e.preventDefault();
+    setError(
+      validateForm({
+        ...dataForm,
+        [e.target.name]: e.target.value,
+      })
+    );
+
     setDataForm({
       ...dataForm,
       [e.target.name]: e.target.value,
@@ -79,34 +145,19 @@ export default function Form() {
 
   const submitForm = (e) => {
     e.preventDefault();
-    if (
-      !dataForm["difficulty"] ||
-      !dataForm["duration"] ||
-      !dataForm["season"]
-    ) {
-      setError(true);
-      alert("Please select a valid option for all required fields.");
-    } else if (
-      dataForm["difficulty"] === "SELECT AN OPTION" ||
-      dataForm["duration"] === "SELECT AN OPTION" ||
-      dataForm["season"] === "SELECT AN OPTION"
-    ) {
-      setError(true);
-      alert("Please select a valid option for all required fields.");
-    } else if (
-      dataForm["name"].length < 2 ||
-      !dataForm["countryID"].length >= 1
-    ) {
-      setError(true);
-      alert("Select at least one country.");
-    } else {
-      dispatch(createActivity(dataForm))
-        .then(() => stateReset())
-        .then(() => alert("Activity added"));
-    }
-  };
 
-  const filteredCountries = countries.slice(currentPage, currentPage + 12);
+    if (dataForm.countryID.length === 0) {
+      setError({
+        ...error,
+        countryID: "SELECT AT LEAST 1 COUNTRY",
+      });
+      return;
+    }
+
+    dispatch(createActivity(dataForm))
+      .then(() => stateReset())
+      .then(() => alert("Activity added"));
+  };
 
   useEffect(() => {
     setCurrentPage(0);
@@ -114,7 +165,7 @@ export default function Form() {
 
   useEffect(() => {
     dispatch(getCountriesByName(inputName));
-  }, [inputName]);
+  }, [dispatch, inputName]);
 
   return (
     <div>
@@ -130,6 +181,7 @@ export default function Form() {
               value={dataForm.name}
               onChange={(e) => setDataHandler(e)}
             />
+            {error.name && <span>{error.name}</span>}
           </div>
 
           <div className={style.difficulty}>
@@ -141,13 +193,14 @@ export default function Form() {
               id="difficulty"
               onChange={(e) => setDataHandler(e)}
             >
-              <option>SELECT AN OPTION</option>
+              <option value="SELECT AN OPTION">SELECT AN OPTION</option>
               <option value={1}>1</option>
               <option value={2}>2</option>
               <option value={3}>3</option>
               <option value={4}>4</option>
               <option value={5}>5</option>
             </select>
+            {error.difficulty && <span>{error.difficulty}</span>}
           </div>
           <div className={style.duration}>
             <label>Duration in hours</label>
@@ -168,6 +221,7 @@ export default function Form() {
               <option value={7}>7</option>
               <option value={8}>8</option>
             </select>
+            {error.duration && <span>{error.duration}</span>}
           </div>
 
           <div className={style.season}>
@@ -180,11 +234,13 @@ export default function Form() {
               onChange={(e) => setDataHandler(e)}
             >
               <option>SELECT AN OPTION</option>
-              <option value="Verano">Verano</option>
-              <option value="Invierno">Invierno</option>
-              <option value="Primavera">Primavera</option>
-              <option value="Otoño">Otoño</option>
+              <option value="Summer">SUMMER</option>
+              <option value="Winter">WINTER</option>
+              <option value="Spring">SPRING</option>
+              <option value="Autumn">AUTUMN</option>
+              <option value="All Seasons">ALL SEASONS</option>
             </select>
+            {error.season && <span>{error.season}</span>}
           </div>
 
           <div className={style.countries}>
@@ -196,6 +252,7 @@ export default function Form() {
               placeholder="find your country..."
               onChange={submitInputName}
             />
+            {error.countryID && <span>{error.countryID}</span>}
           </div>
           <div>
             <input
@@ -207,19 +264,18 @@ export default function Form() {
         </form>
       </div>
       <button onClick={prevPage} className={style.butn}>
-        {" "}
-        {"<"}{" "}
+        {"<"}
       </button>
       <button onClick={nextPage} className={style.butn}>
-        {" "}
-        {">"}{" "}
+        {">"}
       </button>
 
       <div className={style.mybutton}>
-        {dataForm.countryID.map((country) => (
-          <div key={country}>
+        {dataForm.countryID.map((country, id) => (
+          <div>
             {country}
             <button
+              key={id}
               onClick={() => handleRemoveCountry(country)}
               className={style.myXbutton}
             >
@@ -230,8 +286,8 @@ export default function Form() {
       </div>
       <div className={style.order}>
         {filteredCountries.length < 30
-          ? filteredCountries.map((e) => (
-              <div className={style.countryCont}>
+          ? filteredCountries.map((e, index) => (
+              <div className={style.countryCont} key={index}>
                 <div>
                   <CountryCard key={e.id} name={e.name} flags={e.flags} />
                   <button
@@ -246,7 +302,6 @@ export default function Form() {
               </div>
             ))
           : console.log("ERROR :(")}
-        {error && <div className={style.error}>{error}</div>}
       </div>
     </div>
   );

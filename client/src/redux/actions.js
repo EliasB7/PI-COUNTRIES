@@ -1,9 +1,10 @@
 import axios from "axios";
 import {
   GET_COUNTRIES,
+  GET_ACTIVITIES,
+  FILTER_ACTIVITIES,
   GET_COUNTRIES_DETAIL,
   GET_NAME,
-  SHOW_ACTIVITY,
   SORT_ALPHABETIC,
   SORT_ALPHABETIC_REVERSE,
   SORT_POPULATION,
@@ -18,10 +19,17 @@ export function getCountries() {
   };
 }
 
+export function getActivities() {
+  return async (dispatch) => {
+    const res = await axios.get("http://localhost:3001/activities/");
+    dispatch({ type: GET_ACTIVITIES, payload: res.data });
+  };
+}
+
 export function getCountriesByName(name) {
   return async (dispatch) => {
     try {
-      var res = await axios.get(`http://localhost:3001/countries?name=${name}`);
+      let res = await axios.get(`http://localhost:3001/countries?name=${name}`);
       dispatch({ type: GET_NAME, payload: res.data });
     } catch (error) {
       console.log(error);
@@ -48,13 +56,6 @@ export function createActivity(activity) {
     }
   };
 }
-
-export const showActivity = (payload) => {
-  return {
-    type: SHOW_ACTIVITY,
-    payload,
-  };
-};
 
 export function orderAlphabetic() {
   return {
@@ -84,5 +85,12 @@ export const orderCont = (payload) => {
   return {
     type: SORT_CONTINENT,
     payload,
+  };
+};
+
+export const filterActivities = (activity) => {
+  return {
+    type: FILTER_ACTIVITIES,
+    payload: activity,
   };
 };

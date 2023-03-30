@@ -16,14 +16,9 @@ export default function Pagination({
     <nav className={styles.pagination}>
       <ul className={styles.pagination}>
         {pageNumber &&
-          pageNumber.map((number) => (
-            <li className={styles.pagination}>
-              <a
-                onClick={() => pagination(number)}
-                className={styles.pagination}
-              >
-                {number}
-              </a>
+          pageNumber.map((number, id) => (
+            <li className={styles.pagination} key={id}>
+              <button onClick={() => pagination(number)}>{number}</button>
             </li>
           ))}
       </ul>

@@ -41,7 +41,7 @@ export default function Detail() {
           </div>
         </div>
       ) : (
-        <div>Loading...</div>
+        <div>NOT COUNTRY DETAIL FOUND :/</div>
       )}
     </div>
   );
